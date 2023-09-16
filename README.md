@@ -1,2 +1,3 @@
-## Trade
-Soroush app P2P react web app.
+## Wallet web app
+$ yarn
+$ yarn dev
