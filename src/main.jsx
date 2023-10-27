@@ -11,11 +11,13 @@ import PaymentSuccessful from "./views/paymentSuccessful";
 import Checkout from "./views/checkout";
 import TransactionDetails from "./views/transactionDetails";
 import Transactions from "./views/transactions";
+import WalletNotValid from "./views/walletNotValid.jsx";
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <App />
+    path: "/:key",
+    element: <App />,
+    index: true
   },
   {
     path: "/transactions",
@@ -37,6 +39,10 @@ const router = createBrowserRouter([
     path: "/successful",
     element: <PaymentSuccessful />
   },
+  {
+    path: "/walleterror",
+    element: <WalletNotValid />
+  },  
 ])
 
 ReactDOM.createRoot(document.getElementById("root")).render(

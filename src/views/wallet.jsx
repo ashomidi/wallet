@@ -6,9 +6,39 @@ import { connectWallet, disconnectWallet } from "../features/walletSlice";
 import Titles from "../components/Titles";
 import { PiWarningCircle } from "react-icons/pi";
 import { WALLET_ASSETS } from "../dummy/walletAssets";
-import { Link } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import axios from "axios";
 
 function Wallet(params) {
+    const { key } = useParams();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        console.log('key: \n', key)
+    }, [])
+
+    const apiUrl = 'https://soroosh.app/api/set/wallet';
+    const requestData = {
+        address: '0x51F56567D71CF6Dd087f096a60e0b55DF9Ad1d29',
+        key
+    };
+    const config = {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    };
+
+    useEffect(() => {
+        axios
+            .post(apiUrl, requestData, config)
+            .then((response) => {
+                dispatch(connectWallet());
+            })
+            .catch((error) => {
+                navigate("/walleterror");
+            });
+    }, [])
 
     const walletIsConnect = useSelector(state => state.wallet.walletIsConnect);
     const dispatch = useDispatch();
